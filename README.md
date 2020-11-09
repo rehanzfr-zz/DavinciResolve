@@ -8,7 +8,7 @@ Just copy all the text in Fingerprints.txt file and paste into the fusion workin
 
 For complete description watch timelapse at https://youtu.be/JjBZ8LPAHEM
 
-## Circles HUD
+## Ellipses HUD
 Just copy all the text in AnimatedEllipses.txt file and paste into the fusion working space of the Davinci Resolve to get the animated ellipses much without keyframing (Only at one node which can also be changed to expression). You can experiment your own way after double clicking Group nodes. See nodes for visualisation below along with the image, these will produce. 
 
 ![Nodes for animation of Ellipses](Circles.png)
