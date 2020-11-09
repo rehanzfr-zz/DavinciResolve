@@ -1,0 +1,1510 @@
+{
+	Tools = ordered() {
+		Group1_1 = GroupOperator {
+			Outputs = {
+				Output1 = InstanceOutput {
+					SourceOp = "ImagePlane3D1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo {
+				Pos = { 660, 1072.5 },
+				Flags = {
+					AllowPan = false,
+					GridSnap = true,
+					AutoSnap = true,
+					RemoveRouters = true
+				},
+				Size = { 798.357, 167.217, 491.888, 24.2424 },
+				Direction = "Horizontal",
+				PipeStyle = "Direct",
+				Scale = 1,
+				Offset = { -804.674, -1089.57 }
+			},
+			Tools = ordered() {
+				ImagePlane3D1_1 = ImagePlane3D {
+					CtrlWShown = false,
+					Inputs = {
+						["SurfacePlaneInputs.ObjectID.ObjectID"] = Input { Value = 1, },
+						MaterialInput = Input {
+							SourceOp = "Merge19_1_1",
+							Source = "Output",
+						},
+						["MtlStdInputs.MaterialID"] = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 1045, 1105.5 } },
+				},
+				Ellipse3_1_1_1 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_1_2",
+							Source = "Mask",
+						},
+						MotionBlur = Input { Value = 1, },
+						Quality = Input { Value = 9, },
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0404, },
+						Solid = Input { Value = 0, },
+						CapStyle = Input { Value = 2, },
+						WritePosition = Input {
+							Value = -0.258064007012116,
+							Expression = "Ellipse3_1_2.WritePosition-sin((time-2)*0.01)",
+						},
+						WriteLength = Input { Value = 0.102, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1105.5 } },
+				},
+				Ellipse3_1_2 = EllipseMask {
+					Inputs = {
+						MotionBlur = Input { Value = 1, },
+						Quality = Input { Value = 3, },
+						ShutterAngle = Input { Value = 360, },
+						CenterBias = Input { Value = 1, },
+						SampleSpread = Input { Value = 5, },
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0247, },
+						Solid = Input { Value = 0, },
+						CapStyle = Input { Value = 2, },
+						WritePosition = Input {
+							Value = 0.316108141342457,
+							Expression = "abs(sin((time-6)*0.05))*1+0.2",
+						},
+						WriteLength = Input { Value = 0.441, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 550, 1105.5 } },
+				},
+				Background9_1_1 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_1_1_1",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input {
+							Value = 4.9,
+							Expression = ":n= 10; if time < n then return 0; else return (floor((time-n)/0.5))*0.01;end",
+						},
+						TopLeftGreen = Input {
+							Value = 4.9,
+							Expression = "TopLeftRed",
+						},
+						TopLeftBlue = Input {
+							Value = 4.9,
+							Expression = "TopLeftRed",
+						},
+						TopLeftAlpha = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1105.5 } },
+				},
+				Merge18_1 = Merge {
+					CtrlWShown = false,
+					Inputs = {
+						Background = Input {
+							SourceOp = "Background9_2",
+							Source = "Output",
+						},
+						Foreground = Input {
+							SourceOp = "Background9_1_1",
+							Source = "Output",
+						},
+						PerformDepthMerge = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 880, 1105.5 } },
+				},
+				Background9_2 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_2",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input { Value = 1, },
+						TopLeftGreen = Input { Value = 1, },
+						TopLeftBlue = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1072.5 } },
+				},
+				Ellipse3_2 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0069, },
+						Solid = Input { Value = 0, },
+						WriteLength = Input {
+							Value = 0.207547169811321,
+							Expression = ":n=  55; if time < n then return time/comp.RenderEnd;else return n/comp.RenderEnd;end",
+						},
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1072.5 } },
+				},
+				Background10_1_1 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Rectangle5_1_1",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input { Value = 1, },
+						TopLeftGreen = Input { Value = 1, },
+						TopLeftBlue = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 715, 1204.5 } },
+				},
+				Rectangle5_1_1 = RectangleMask {
+					CtrlWShown = false,
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+						Center = Input { Value = { 0.5, 0.835446064139942 }, },
+						Width = Input { Value = 0.009, },
+						Height = Input { Value = 0.131, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 605, 1204.5 } },
+				},
+				Duplicate4_1_1 = Fuse.Duplicate {
+					CtrlWShown = false,
+					Inputs = {
+						Copies = Input { Value = 12, },
+						TimeOffset = Input { Value = 1.19, },
+						Angle = Input {
+							Value = 62.2641509433962,
+							Expression = ":n=  55; if time < n then return time/comp.RenderEnd*300;else return n/comp.RenderEnd*300;end",
+						},
+						RandomSeed = Input { Value = 26024, },
+						Background = Input {
+							SourceOp = "Text3",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 715, 1171.5 } },
+				},
+				Transform11_1_1 = Transform {
+					CtrlWShown = false,
+					Inputs = {
+						Size = Input { Value = 0.98, },
+						Input = Input {
+							SourceOp = "Duplicate4_1_1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 825, 1171.5 } },
+				},
+				Merge19_1_1 = Merge {
+					CtrlWShown = false,
+					Inputs = {
+						Background = Input {
+							SourceOp = "Transform11_1_1",
+							Source = "Output",
+						},
+						Foreground = Input {
+							SourceOp = "Merge18_1",
+							Source = "Output",
+						},
+						PerformDepthMerge = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 935, 1171.5 } },
+				},
+				Text3 = TextPlus {
+					CtrlWShown = false,
+					Inputs = {
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						Center = Input { Value = { 0.5, 0.888323677790202 }, },
+						StyledText = Input {
+							SourceOp = "TextScramble1",
+							Source = "ScrambledText",
+						},
+						Font = Input { Value = "Open Sans", },
+						Style = Input { Value = "Light", },
+						Size = Input { Value = 0.0548, },
+						VerticalJustificationNew = Input { Value = 3, },
+						HorizontalJustificationNew = Input { Value = 3, },
+						ManualFontKerningPlacement = Input {
+							Value = StyledText {
+								Array = {
+								},
+								Value = ""
+							},
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 605, 1171.5 } },
+				}
+			},
+		},
+		TextScramble1 = TextScramble {
+			CtrlWZoom = false,
+			Inputs = {
+				Randomness = Input { Value = 0.024, },
+				InputText = Input { Value = "1", },
+				SubstituteChars = Input { Value = "0123456789", },
+			},
+		},
+		Transform3D2 = Transform3D {
+			Inputs = {
+				SceneInput = Input {
+					SourceOp = "ImagePlane3D1_1",
+					Source = "Output",
+				},
+				["Transform3DOp.Translate.Z"] = Input { Value = 1.22630560939869, },
+				["Transform3DOp.Rotate.Z"] = Input { Value = 185.5, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 1072.5 } },
+		},
+		Transform3D2_1 = Transform3D {
+			Inputs = {
+				SceneInput = Input {
+					SourceOp = "ImagePlane3D1_1_1",
+					Source = "Output",
+				},
+				["Transform3DOp.Translate.Z"] = Input { Value = 0.305629359546739, },
+				["Transform3DOp.Rotate.Z"] = Input { Value = 281, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 1105.5 } },
+		},
+		Group1_1_1 = GroupOperator {
+			Outputs = {
+				Output1 = InstanceOutput {
+					SourceOp = "ImagePlane3D1_1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo {
+				Pos = { 660, 1105.5 },
+				Flags = {
+					AllowPan = false,
+					GridSnap = true,
+					AutoSnap = true,
+					RemoveRouters = true
+				},
+				Size = { 993.204, 197.93, 686.735, 44.9556 },
+				Direction = "Horizontal",
+				PipeStyle = "Direct",
+				Scale = 1,
+				Offset = { -939.81, -1086 }
+			},
+			Tools = ordered() {
+				ImagePlane3D1_1_1 = ImagePlane3D {
+					CtrlWShown = false,
+					Inputs = {
+						["SurfacePlaneInputs.ObjectID.ObjectID"] = Input { Value = 1, },
+						MaterialInput = Input {
+							SourceOp = "Merge18_1_1",
+							Source = "Output",
+						},
+						["MtlStdInputs.MaterialID"] = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 1045, 1105.5 } },
+				},
+				Ellipse3_1_1_1_1 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_1_2_1",
+							Source = "Mask",
+						},
+						MotionBlur = Input { Value = 1, },
+						Quality = Input { Value = 9, },
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0404, },
+						Solid = Input { Value = 0, },
+						CapStyle = Input { Value = 2, },
+						WritePosition = Input {
+							Value = -0.258064007012116,
+							Expression = "Ellipse3_1_2_1.WritePosition-sin((time-2)*0.01)",
+						},
+						WriteLength = Input { Value = 0.102, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1105.5 } },
+				},
+				Ellipse3_1_2_1 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						MotionBlur = Input { Value = 1, },
+						Quality = Input { Value = 3, },
+						ShutterAngle = Input { Value = 360, },
+						CenterBias = Input { Value = 1, },
+						SampleSpread = Input { Value = 5, },
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0247, },
+						Solid = Input { Value = 0, },
+						CapStyle = Input { Value = 2, },
+						WritePosition = Input {
+							Value = 0.316108141342457,
+							Expression = "abs(sin((time-6)*0.05))*1+0.2",
+						},
+						WriteLength = Input { Value = 0.441, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 550, 1105.5 } },
+				},
+				Background9_1_1_1 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_1_1_1_1",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input {
+							Value = 4.9,
+							Expression = ":n= 10; if time < n then return 0; else return (floor((time-n)/0.5))*0.01;end",
+						},
+						TopLeftGreen = Input {
+							Value = 4.9,
+							Expression = "TopLeftRed",
+						},
+						TopLeftBlue = Input {
+							Value = 4.9,
+							Expression = "TopLeftRed",
+						},
+						TopLeftAlpha = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1105.5 } },
+				},
+				Merge18_1_1 = Merge {
+					CtrlWShown = false,
+					Inputs = {
+						Background = Input {
+							SourceOp = "Background9_2_1",
+							Source = "Output",
+						},
+						Foreground = Input {
+							SourceOp = "Background9_1_1_1",
+							Source = "Output",
+						},
+						PerformDepthMerge = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 880, 1072.5 } },
+				},
+				Background9_2_1 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_2_1",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input { Value = 1, },
+						TopLeftGreen = Input { Value = 1, },
+						TopLeftBlue = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1072.5 } },
+				},
+				Ellipse3_2_1 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0069, },
+						Solid = Input { Value = 0, },
+						WriteLength = Input {
+							Value = 0.207547169811321,
+							Expression = ":n=  55; if time < n then return time/comp.RenderEnd;else return n/comp.RenderEnd;end",
+						},
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1072.5 } },
+				},
+				Background10_1 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Rectangle5_1",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input { Value = 1, },
+						TopLeftGreen = Input { Value = 1, },
+						TopLeftBlue = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 550, 1204.5 } },
+				},
+				Rectangle5_1 = RectangleMask {
+					CtrlWShown = false,
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+						Center = Input { Value = { 0.5, 0.835446064139942 }, },
+						Width = Input { Value = 0.009, },
+						Height = Input { Value = 0.131, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 440, 1204.5 } },
+				},
+				Duplicate4_1 = Fuse.Duplicate {
+					CtrlWShown = false,
+					Inputs = {
+						Copies = Input { Value = 12, },
+						TimeOffset = Input { Value = 0.56, },
+						Angle = Input {
+							Value = 207.547169811321,
+							Expression = ":n=  55; if time < n then return time/comp.RenderEnd*1000;else return n/comp.RenderEnd*1000;end",
+						},
+						RandomSeed = Input { Value = 26024, },
+						Background = Input {
+							SourceOp = "Text4",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1171.5 } },
+				},
+				Transform11_1 = Transform {
+					CtrlWShown = false,
+					Inputs = {
+						Size = Input { Value = 0.98, },
+						Input = Input {
+							SourceOp = "Duplicate4_1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1171.5 } },
+				},
+				Merge19_1 = Merge {
+					CtrlWShown = false,
+					Inputs = {
+						Background = Input {
+							SourceOp = "Transform11_1",
+							Source = "Output",
+						},
+						PerformDepthMerge = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 880, 1171.5 } },
+				},
+				Text4 = TextPlus {
+					CtrlWShown = false,
+					Inputs = {
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						Center = Input { Value = { 0.5, 0.75198235184392 }, },
+						StyledText = Input {
+							SourceOp = "TextScramble2",
+							Source = "ScrambledText",
+						},
+						Font = Input { Value = "Open Sans", },
+						Style = Input { Value = "Light", },
+						Size = Input { Value = 0.0547, },
+						VerticalJustificationNew = Input { Value = 3, },
+						HorizontalJustificationNew = Input { Value = 3, },
+						ManualFontKerningPlacement = Input {
+							Value = StyledText {
+								Array = {
+								},
+								Value = ""
+							},
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 550, 1171.5 } },
+				}
+			},
+		},
+		TextScramble2 = TextScramble {
+			CtrlWZoom = false,
+			Inputs = {
+				Randomness = Input { Value = 0.181, },
+				InputText = Input { Value = "A", },
+				SubstituteChars = Input { Value = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", },
+			},
+		},
+		Transform3D3 = Transform3D {
+			Inputs = {
+				SceneInput = Input {
+					SourceOp = "ImagePlane3D1",
+					Source = "Output",
+				},
+				["Transform3DOp.Translate.Z"] = Input { Value = -0.345776700741452, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 1138.5 } },
+		},
+		Merge3D2 = Merge3D {
+			Inputs = {
+				SceneInput1 = Input {
+					SourceOp = "Transform3D3",
+					Source = "Output",
+				},
+				SceneInput2 = Input {
+					SourceOp = "Transform3D2",
+					Source = "Output",
+				},
+				SceneInput3 = Input {
+					SourceOp = "Transform3D2_1",
+					Source = "Output",
+				},
+				SceneInput5 = Input {
+					SourceOp = "Transform3D2_1_1_1",
+					Source = "Output",
+				},
+				SceneInput4 = Input {
+					SourceOp = "Transform3D2_1_1",
+					Source = "Output",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 1138.5 } },
+		},
+		Group1 = GroupOperator {
+			Outputs = {
+				Output1 = InstanceOutput {
+					SourceOp = "ImagePlane3D1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo {
+				Pos = { 660, 1138.5 },
+				Flags = {
+					AllowPan = false,
+					GridSnap = true,
+					AutoSnap = true,
+					RemoveRouters = true
+				},
+				Size = { 612.938, 165.075, 306.469, 24.2424 },
+				Direction = "Horizontal",
+				PipeStyle = "Direct",
+				Scale = 1,
+				Offset = { -801.531, -1098.14 }
+			},
+			Tools = ordered() {
+				ImagePlane3D1 = ImagePlane3D {
+					CtrlWShown = false,
+					Inputs = {
+						["SurfacePlaneInputs.ObjectID.ObjectID"] = Input { Value = 1, },
+						MaterialInput = Input {
+							SourceOp = "Merge18",
+							Source = "Output",
+						},
+						["MtlStdInputs.MaterialID"] = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 1045, 1105.5 } },
+				},
+				Ellipse3_1_1 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_1",
+							Source = "Mask",
+						},
+						MotionBlur = Input { Value = 1, },
+						Quality = Input { Value = 9, },
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0404, },
+						Solid = Input { Value = 0, },
+						CapStyle = Input { Value = 2, },
+						WritePosition = Input {
+							Value = -0.258064007012116,
+							Expression = "Ellipse3_1.WritePosition-sin((time-2)*0.01)",
+						},
+						WriteLength = Input { Value = 0.102, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1105.5 } },
+				},
+				Ellipse3_1 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						MotionBlur = Input { Value = 1, },
+						Quality = Input { Value = 3, },
+						ShutterAngle = Input { Value = 360, },
+						CenterBias = Input { Value = 1, },
+						SampleSpread = Input { Value = 5, },
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0247, },
+						Solid = Input { Value = 0, },
+						CapStyle = Input { Value = 2, },
+						WritePosition = Input {
+							Value = 0.316108141342457,
+							Expression = "abs(sin((time-6)*0.05))*1+0.2",
+						},
+						WriteLength = Input { Value = 0.441, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 550, 1105.5 } },
+				},
+				Background9_1 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_1_1",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input {
+							Value = 4.9,
+							Expression = ":n= 10; if time < n then return 0; else return (floor((time-n)/0.5))*0.01;end",
+						},
+						TopLeftGreen = Input {
+							Value = 4.9,
+							Expression = "TopLeftRed",
+						},
+						TopLeftBlue = Input {
+							Value = 4.9,
+							Expression = "TopLeftRed",
+						},
+						TopLeftAlpha = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1105.5 } },
+				},
+				Merge18 = Merge {
+					CtrlWShown = false,
+					Inputs = {
+						Background = Input {
+							SourceOp = "Background9",
+							Source = "Output",
+						},
+						Foreground = Input {
+							SourceOp = "Background9_1",
+							Source = "Output",
+						},
+						PerformDepthMerge = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 880, 1105.5 } },
+				},
+				Background9 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input { Value = 1, },
+						TopLeftGreen = Input { Value = 1, },
+						TopLeftBlue = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1072.5 } },
+				},
+				Ellipse3 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0069, },
+						Solid = Input { Value = 0, },
+						WriteLength = Input {
+							Value = 0.207547169811321,
+							Expression = ":n=  55; if time < n then return time/comp.RenderEnd;else return n/comp.RenderEnd;end",
+						},
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1072.5 } },
+				},
+				Merge19_1_2 = Merge {
+					CtrlWShown = false,
+					Inputs = {
+						Background = Input {
+							SourceOp = "Transform11_1_2",
+							Source = "Output",
+						},
+						PerformDepthMerge = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 990, 1171.5 } },
+				},
+				Transform11_1_2 = Transform {
+					CtrlWShown = false,
+					Inputs = {
+						Size = Input { Value = 0.98, },
+						Input = Input {
+							SourceOp = "Duplicate4_1_2",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 880, 1171.5 } },
+				},
+				Duplicate4_1_2 = Fuse.Duplicate {
+					CtrlWShown = false,
+					Inputs = {
+						Copies = Input { Value = 12, },
+						TimeOffset = Input { Value = 0.79, },
+						Angle = Input {
+							Value = 207.547169811321,
+							Expression = ":n=  55; if time < n then return time/comp.RenderEnd*1000;else return n/comp.RenderEnd*1000;end",
+						},
+						RandomSeed = Input { Value = 26024, },
+						Background = Input {
+							SourceOp = "Text5",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1171.5 } },
+				},
+				Rectangle5_1_2 = RectangleMask {
+					CtrlWShown = false,
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+						Center = Input { Value = { 0.5, 0.835446064139942 }, },
+						Width = Input { Value = 0.009, },
+						Height = Input { Value = 0.131, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 550, 1204.5 } },
+				},
+				Background10_1_2 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Rectangle5_1_2",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input { Value = 1, },
+						TopLeftGreen = Input { Value = 1, },
+						TopLeftBlue = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1204.5 } },
+				},
+				Text5 = TextPlus {
+					CtrlWShown = false,
+					Inputs = {
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						Center = Input { Value = { 0.5, 0.77213619029196 }, },
+						StyledText = Input {
+							SourceOp = "TextScramble3",
+							Source = "ScrambledText",
+						},
+						Font = Input { Value = "Open Sans", },
+						Style = Input { Value = "Light", },
+						VerticalJustificationNew = Input { Value = 3, },
+						HorizontalJustificationNew = Input { Value = 3, },
+						ManualFontKerningPlacement = Input {
+							Value = StyledText {
+								Array = {
+								},
+								Value = ""
+							},
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 605, 1171.5 } },
+				}
+			},
+		},
+		TextScramble3 = TextScramble {
+			CtrlWZoom = false,
+			Inputs = {
+				Randomness = Input { Value = 0.152, },
+				InputText = Input { Value = "z", },
+				SubstituteChars = Input { Value = "abcdefghijklmnopqrstuvwxyz", },
+			},
+		},
+		Merge3D1 = Merge3D {
+			Inputs = {
+				SceneInput1 = Input {
+					SourceOp = "Merge3D2",
+					Source = "Output",
+				},
+				SceneInput2 = Input {
+					SourceOp = "Transform3D4",
+					Source = "Output",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 1045, 1138.5 } },
+		},
+		Transform3D4 = Transform3D {
+			Inputs = {
+				SceneInput = Input {
+					SourceOp = "Transform3D1",
+					Source = "Output",
+				},
+				["Transform3DOp.Rotate.Y"] = Input { Value = -0.289, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 1045, 1171.5 } },
+		},
+		Group1_1_1_1 = GroupOperator {
+			Outputs = {
+				Output1 = InstanceOutput {
+					SourceOp = "ImagePlane3D1_1_1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo {
+				Pos = { 660, 1171.5 },
+				Flags = {
+					AllowPan = false,
+					GridSnap = true,
+					AutoSnap = true,
+					RemoveRouters = true
+				},
+				Size = { 694.648, 182.216, 388.179, 24.2424 },
+				Direction = "Horizontal",
+				PipeStyle = "Direct",
+				Scale = 1,
+				Offset = { -801.531, -1081 }
+			},
+			Tools = ordered() {
+				ImagePlane3D1_1_1_1 = ImagePlane3D {
+					CtrlWShown = false,
+					Inputs = {
+						["SurfacePlaneInputs.ObjectID.ObjectID"] = Input { Value = 1, },
+						MaterialInput = Input {
+							SourceOp = "Merge18_1_1_1",
+							Source = "Output",
+						},
+						["MtlStdInputs.MaterialID"] = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 1045, 1105.5 } },
+				},
+				Ellipse3_1_1_1_1_1 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_1_2_1_1",
+							Source = "Mask",
+						},
+						MotionBlur = Input { Value = 1, },
+						Quality = Input { Value = 9, },
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0404, },
+						Solid = Input { Value = 0, },
+						CapStyle = Input { Value = 2, },
+						WritePosition = Input {
+							Value = -0.258064007012116,
+							Expression = "Ellipse3_1_2_1_1.WritePosition-sin((time-2)*0.01)",
+						},
+						WriteLength = Input { Value = 0.102, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1105.5 } },
+				},
+				Ellipse3_1_2_1_1 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						MotionBlur = Input { Value = 1, },
+						Quality = Input { Value = 3, },
+						ShutterAngle = Input { Value = 360, },
+						CenterBias = Input { Value = 1, },
+						SampleSpread = Input { Value = 5, },
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0247, },
+						Solid = Input { Value = 0, },
+						CapStyle = Input { Value = 2, },
+						WritePosition = Input {
+							Value = 0.316108141342457,
+							Expression = "abs(sin((time-6)*0.05))*1+0.2",
+						},
+						WriteLength = Input { Value = 0.441, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 550, 1105.5 } },
+				},
+				Background9_1_1_1_1 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_1_1_1_1_1",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input {
+							Value = 4.9,
+							Expression = ":n= 10; if time < n then return 0; else return (floor((time-n)/0.5))*0.01;end",
+						},
+						TopLeftGreen = Input {
+							Value = 4.9,
+							Expression = "TopLeftRed",
+						},
+						TopLeftBlue = Input {
+							Value = 4.9,
+							Expression = "TopLeftRed",
+						},
+						TopLeftAlpha = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1105.5 } },
+				},
+				Merge18_1_1_1 = Merge {
+					CtrlWShown = false,
+					Inputs = {
+						Background = Input {
+							SourceOp = "Background9_2_1_1",
+							Source = "Output",
+						},
+						Foreground = Input {
+							SourceOp = "Background9_1_1_1_1",
+							Source = "Output",
+						},
+						PerformDepthMerge = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 880, 1105.5 } },
+				},
+				Background9_2_1_1 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_2_1_1",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input { Value = 1, },
+						TopLeftGreen = Input { Value = 1, },
+						TopLeftBlue = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1072.5 } },
+				},
+				Ellipse3_2_1_1 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0069, },
+						Solid = Input { Value = 0, },
+						WriteLength = Input {
+							Value = 0.207547169811321,
+							Expression = ":n=  55; if time < n then return time/comp.RenderEnd;else return n/comp.RenderEnd;end",
+						},
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1072.5 } },
+				},
+				Merge19_1_2_1 = Merge {
+					CtrlWShown = false,
+					Inputs = {
+						Background = Input {
+							SourceOp = "Transform11_1_2_1",
+							Source = "Output",
+						},
+						PerformDepthMerge = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 935, 1171.5 } },
+				},
+				Transform11_1_2_1 = Transform {
+					CtrlWShown = false,
+					Inputs = {
+						Size = Input { Value = 0.98, },
+						Input = Input {
+							SourceOp = "Duplicate4_1_2_1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 825, 1171.5 } },
+				},
+				Duplicate4_1_2_1 = Fuse.Duplicate {
+					CtrlWShown = false,
+					Inputs = {
+						Copies = Input { Value = 12, },
+						TimeOffset = Input { Value = 1.11, },
+						Angle = Input {
+							Value = 207.547169811321,
+							Expression = ":n=  55; if time < n then return time/comp.RenderEnd*1000;else return n/comp.RenderEnd*1000;end",
+						},
+						RandomSeed = Input { Value = 26024, },
+						Background = Input {
+							SourceOp = "Text6",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 715, 1171.5 } },
+				},
+				Rectangle5_1_2_1 = RectangleMask {
+					CtrlWShown = false,
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+						Center = Input { Value = { 0.5, 0.835446064139942 }, },
+						Width = Input { Value = 0.009, },
+						Height = Input { Value = 0.131, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 495, 1204.5 } },
+				},
+				Background10_1_2_1 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Rectangle5_1_2_1",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input { Value = 1, },
+						TopLeftGreen = Input { Value = 1, },
+						TopLeftBlue = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 605, 1204.5 } },
+				},
+				Text6 = TextPlus {
+					CtrlWShown = false,
+					Inputs = {
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						Center = Input { Value = { 0.5, 0.678988106752518 }, },
+						StyledText = Input {
+							SourceOp = "TextScramble4",
+							Source = "ScrambledText",
+						},
+						Font = Input { Value = "Open Sans", },
+						Style = Input { Value = "Light", },
+						Size = Input { Value = 0.0562, },
+						VerticalJustificationNew = Input { Value = 3, },
+						HorizontalJustificationNew = Input { Value = 3, },
+						ManualFontKerningPlacement = Input {
+							Value = StyledText {
+								Array = {
+								},
+								Value = ""
+							},
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 605, 1171.5 } },
+				}
+			},
+		},
+		TextScramble4 = TextScramble {
+			CtrlWZoom = false,
+			Inputs = {
+				Randomness = Input { Value = 0.289, },
+				InputText = Input { Value = "X", },
+				SubstituteChars = Input { Value = "xyfh234", },
+			},
+		},
+		Transform3D2_1_1 = Transform3D {
+			Inputs = {
+				SceneInput = Input {
+					SourceOp = "ImagePlane3D1_1_1_1",
+					Source = "Output",
+				},
+				["Transform3DOp.Translate.Z"] = Input { Value = -1.67383459023957, },
+				["Transform3DOp.Rotate.Z"] = Input { Value = 281, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 1171.5 } },
+		},
+		Renderer3D2 = Renderer3D {
+			CustomData = { ToolVersion = 2, },
+			Inputs = {
+				GlobalOut = Input { Value = 265, },
+				Width = Input { Value = 1920, },
+				Height = Input { Value = 1080, },
+				UseFrameFormatSettings = Input { Value = 1, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				SceneInput = Input {
+					SourceOp = "Merge3D1",
+					Source = "Output",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 1155, 1138.5 } },
+		},
+		Transform3D1 = Transform3D {
+			CtrlWZoom = false,
+			Inputs = {
+				SceneInput = Input {
+					SourceOp = "Camera3D1",
+					Source = "Output",
+				},
+				["Transform3DOp.Translate.Z"] = Input {
+					SourceOp = "Perturb1",
+					Source = "Value",
+				},
+				["Transform3DOp.Rotate.Z"] = Input { Value = 3, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 1045, 1204.5 } },
+		},
+		Perturb1 = PerturbNumber {
+			CtrlWZoom = false,
+			Inputs = {
+				Value = Input {
+					SourceOp = "Perturb1Value",
+					Source = "Value",
+				},
+				Strength = Input { Value = 1.36, },
+				Wobble = Input { Value = 1.26, },
+				Speed = Input { Value = 1.5, },
+			},
+		},
+		Perturb1Value = BezierSpline {
+			SplineColor = { Red = 254, Green = 56, Blue = 46 },
+			NameSet = true,
+			KeyFrames = {
+				[0] = { -5.52, RH = { 27.4, -5.65 } },
+				[50] = { 3.4, LH = { -4.6, 2.05 }, RH = { 100, 3.4 } },
+				[200] = { 3.4, LH = { 150, 3.4 }, RH = { 278, 3.9 }, Flags = { Linear = true } },
+				[265] = { -7.216, LH = { 243.333333333333, -7.216 } }
+			}
+		},
+		Camera3D1 = Camera3D {
+			NameSet = true,
+			CustomData = { Settings = { [1] = { Tools = ordered() { Camera3D1 = Camera3D { Inputs = { ApertureW = Input { Value = 0.831496062992126 }, AoV = Input { Value = 19.2642683071402 }, ["Stereo.Mode"] = Input { Value = FuID { "OffAxis" } }, ["MtlStdInputs.MaterialID"] = Input { Value = 1 }, ApertureH = Input { Value = 0.467716535433071 }, FilmGate = Input { Value = FuID { "BMD_URSA_4K_16x9" } }, ["SurfacePlaneInputs.ObjectID.ObjectID"] = Input { Value = 1 } }, Name = "Camera3D1", CtrlWZoom = false, NameSet = true, ViewInfo = OperatorInfo { Pos = { 550, 214.5 } }, CustomData = {
+								} } } }, [6] = { Tools = ordered() { Camera3D1 = Camera3D { Inputs = { FLength = Input { Value = 49.0568334445481 }, ["Transform3DOp.Translate.Z"] = Input { Expression = "self.ImageInput.Metadata.Translate.Z" }, ImagePlaneEnabled = Input { Value = 0 }, AoV = Input { Value = 19.2642683071402, Expression = "self.ImageInput.Metadata.RSCameraFOV or self.ImageInput.Metadata['rs/camera/fov']" }, AovType = Input { Value = 1 }, ["Transform3DOp.Rotate.Y"] = Input { Expression = "self.ImageInput.Metadata.Rotate.Y" }, ApertureH = Input { Value = 0.9 }, FilmGate = Input { Value = FuID { "HD" } }, ["Transform3DOp.Rotate.X"] = Input { Expression = "self.ImageInput.Metadata.Rotate.X" }, ["Transform3DOp.Translate.X"] = Input { Expression = "self.ImageInput.Metadata.Translate.X" }, PlaneOfFocus = Input { Expression = "self.ImageInput.Metadata.RSCameraDOFFocusDistance or self.ImageInput.Metadata['rs/camera/DOFFocusDistance']" }, FilmBack = Input { Value = 1 }, ["Transform3DOp.Rotate.RotOrder"] = Input { Value = FuID { "ZXY" } }, ["Transform3DOp.Rotate.Z"] = Input { Expression = "self.ImageInput.Metadata.Rotate.Z" }, ["Stereo.Mode"] = Input { Value = FuID { "OffAxis" } }, ApertureW = Input { Value = 1.6 }, ["Transform3DOp.Translate.Y"] = Input { Expression = "self.ImageInput.Metadata.Translate.Y" }, ["SurfacePlaneInputs.ObjectID.ObjectID"] = Input { Value = 1 }, ["MtlStdInputs.MaterialID"] = Input { Value = 1 } }, CtrlWZoom = false, NameSet = true, ViewInfo = OperatorInfo { Pos = { 387, 145 } }, CustomData = {
+								} } } } } },
+			Inputs = {
+				AoV = Input { Value = 19.2642683071402, },
+				["Stereo.Mode"] = Input { Value = FuID { "Mono" }, },
+				FilmGate = Input { Value = FuID { "BMD_URSA_4K_16x9" }, },
+				ApertureW = Input { Value = 0.831496062992126, },
+				ApertureH = Input { Value = 0.467716535433071, },
+				["SurfacePlaneInputs.ObjectID.ObjectID"] = Input { Value = 1, },
+				["MtlStdInputs.MaterialID"] = Input { Value = 1, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 1204.5 } },
+		},
+		Group1_1_1_1_1 = GroupOperator {
+			Outputs = {
+				Output1 = InstanceOutput {
+					SourceOp = "ImagePlane3D1_1_1_1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo {
+				Pos = { 660, 1204.5 },
+				Flags = {
+					AllowPan = false,
+					GridSnap = true,
+					AutoSnap = true,
+					RemoveRouters = true
+				},
+				Size = { 851.783, 166.503, 545.314, 24.2424 },
+				Direction = "Horizontal",
+				PipeStyle = "Direct",
+				Scale = 1,
+				Offset = { -801.531, -1060.83 }
+			},
+			Tools = ordered() {
+				ImagePlane3D1_1_1_1_1 = ImagePlane3D {
+					CtrlWShown = false,
+					Inputs = {
+						["SurfacePlaneInputs.ObjectID.ObjectID"] = Input { Value = 1, },
+						MaterialInput = Input {
+							SourceOp = "Merge18_1_1_1_1",
+							Source = "Output",
+						},
+						["MtlStdInputs.MaterialID"] = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 1045, 1105.5 } },
+				},
+				Ellipse3_1_1_1_1_1_1 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_1_2_1_1_1",
+							Source = "Mask",
+						},
+						MotionBlur = Input { Value = 1, },
+						Quality = Input { Value = 9, },
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0404, },
+						Solid = Input { Value = 0, },
+						CapStyle = Input { Value = 2, },
+						WritePosition = Input {
+							Value = -0.258064007012116,
+							Expression = "Ellipse3_1_2_1_1_1.WritePosition-sin((time-2)*0.01)",
+						},
+						WriteLength = Input { Value = 0.102, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1105.5 } },
+				},
+				Ellipse3_1_2_1_1_1 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						MotionBlur = Input { Value = 1, },
+						Quality = Input { Value = 3, },
+						ShutterAngle = Input { Value = 360, },
+						CenterBias = Input { Value = 1, },
+						SampleSpread = Input { Value = 5, },
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0247, },
+						Solid = Input { Value = 0, },
+						CapStyle = Input { Value = 2, },
+						WritePosition = Input {
+							Value = 0.316108141342457,
+							Expression = "abs(sin((time-6)*0.05))*1+0.2",
+						},
+						WriteLength = Input { Value = 0.441, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 550, 1105.5 } },
+				},
+				Background9_1_1_1_1_1 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_1_1_1_1_1_1",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input {
+							Value = 4.9,
+							Expression = ":n= 10; if time < n then return 0; else return (floor((time-n)/0.5))*0.01;end",
+						},
+						TopLeftGreen = Input {
+							Value = 4.9,
+							Expression = "TopLeftRed",
+						},
+						TopLeftBlue = Input {
+							Value = 4.9,
+							Expression = "TopLeftRed",
+						},
+						TopLeftAlpha = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1105.5 } },
+				},
+				Merge18_1_1_1_1 = Merge {
+					CtrlWShown = false,
+					Inputs = {
+						Background = Input {
+							SourceOp = "Background9_2_1_1_1",
+							Source = "Output",
+						},
+						Foreground = Input {
+							SourceOp = "Background9_1_1_1_1_1",
+							Source = "Output",
+						},
+						PerformDepthMerge = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 880, 1105.5 } },
+				},
+				Background9_2_1_1_1 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse3_2_1_1_1",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input { Value = 1, },
+						TopLeftGreen = Input { Value = 1, },
+						TopLeftBlue = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1072.5 } },
+				},
+				Ellipse3_2_1_1_1 = EllipseMask {
+					CtrlWShown = false,
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						BorderWidth = Input { Value = 0.0069, },
+						Solid = Input { Value = 0, },
+						WriteLength = Input {
+							Value = 0.207547169811321,
+							Expression = ":n=  55; if time < n then return time/comp.RenderEnd;else return n/comp.RenderEnd;end",
+						},
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1072.5 } },
+				},
+				Merge19_1_2_2 = Merge {
+					CtrlWShown = false,
+					Inputs = {
+						Background = Input {
+							SourceOp = "Transform11_1_2_2",
+							Source = "Output",
+						},
+						PerformDepthMerge = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 880, 1138.5 } },
+				},
+				Transform11_1_2_2 = Transform {
+					CtrlWShown = false,
+					Inputs = {
+						Size = Input { Value = 0.98, },
+						Input = Input {
+							SourceOp = "Duplicate4_1_2_2",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 770, 1138.5 } },
+				},
+				Duplicate4_1_2_2 = Fuse.Duplicate {
+					CtrlWShown = false,
+					Inputs = {
+						Copies = Input { Value = 12, },
+						Angle = Input {
+							Value = 207.547169811321,
+							Expression = ":n=  55; if time < n then return time/comp.RenderEnd*1000;else return n/comp.RenderEnd*1000;end",
+						},
+						RandomSeed = Input { Value = 26024, },
+						Background = Input {
+							SourceOp = "Background10_1_2_2",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 660, 1138.5 } },
+				},
+				Rectangle5_1_2_2 = RectangleMask {
+					CtrlWZoom = false,
+					CtrlWShown = false,
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+						Center = Input { Value = { 0.5, 0.835446064139942 }, },
+						Width = Input { Value = 0.009, },
+						Height = Input { Value = 0.131, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 440, 1138.5 } },
+				},
+				Background10_1_2_2 = Background {
+					CtrlWShown = false,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Rectangle5_1_2_2",
+							Source = "Mask",
+						},
+						GlobalOut = Input { Value = 265, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftRed = Input { Value = 1, },
+						TopLeftGreen = Input { Value = 1, },
+						TopLeftBlue = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 550, 1138.5 } },
+				}
+			},
+		},
+		Transform3D2_1_1_1 = Transform3D {
+			Inputs = {
+				SceneInput = Input {
+					SourceOp = "ImagePlane3D1_1_1_1_1",
+					Source = "Output",
+				},
+				["Transform3DOp.Translate.Z"] = Input { Value = -5.45, },
+				["Transform3DOp.Rotate.Z"] = Input { Value = 416.6, },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 1204.5 } },
+		}
+	}
+}
