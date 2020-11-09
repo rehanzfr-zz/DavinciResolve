@@ -1,5 +1,7 @@
 # DavinciResolve
 
+I am making video presentations for my science group and collaborators. I am sharing here the reources/components which have been used in some of my presentations. I am adding up my part by giving the nodes of Davinci resolve (Fusion) free and hope you will add yours. 
+
 ## Fingerprint HUD
 
 Just copy all the text in Fingerprints.txt file and paste into the fusion working space of the Davinci Resolve. After it, by double clicking the "Fingerprint" and "_3fingerprint" nodes, change the location of image file to your respective path to image of fingerprint. The image of fingerprint is also given above. The link to the image is https://pixabay.com/photos/fingerprint-traces-pattern-456483/
