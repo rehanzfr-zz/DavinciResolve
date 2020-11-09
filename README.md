@@ -1,6 +1,6 @@
 # DavinciResolve
 
-I am making video presentations for my science group and collaborators. I am sharing here the reources/components which have been used in some of my presentations. I am adding up my part by giving the nodes of Davinci resolve (Fusion) free and hope you will add yours. 
+I am making video presentations for my science group and collaborators. I am sharing here the resources/components which have been developed for some of my presentations. 
 
 ## Fingerprint HUD
 
